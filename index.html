@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>দৈনিক বাংলা - বাংলাদেশের সর্বাধিক পঠিত অনলাইন নিউজ পোর্টাল</title>
+    <style>
+        /* Font imports */
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+        
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #006a4e;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #f9a825;
+        }
+        
+        .date-time {
+            font-size: 14px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #f9a825;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .main-nav {
+            display: flex;
+            list-style: none;
+        }
+        
+        .main-nav li {
+            position: relative;
+        }
+        
+        .main-nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 12px 15px;
+            display: block;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .main-nav a:hover {
+            background-color: #e69500;
+        }
+        
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+        
+        /* Article styles */
+        .article-container {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .article-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #006a4e;
+            line-height: 1.4;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .article-meta i {
+            margin-right: 5px;
+        }
+        
+        /* Image Slider Styles */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .slider-dot.active {
+            background: #006a4e;
+        }
+        
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px 10px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 18px;
+        }
+        
+        .slider-arrow.prev {
+            left: 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .slider-arrow.next {
+            right: 0;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        /* Video Embed Styles */
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .article-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .article-content p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .article-content h2 {
+            color: #006a4e;
+            margin: 25px 0 15px;
+            font-size: 22px;
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* Ad styles */
+        .ad-container {
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 250px;
+            border: 1px dashed #ccc;
+            margin: 20px 0;
+        }
+        
+        .ad-sidebar {
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            border: 1px dashed #ccc;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: #222;
+            color: #ddd;
+            padding: 40px 0 20px;
+            margin-top: 30px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-widget h3 {
+            color: #f9a825;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-widget ul {
+            list-style: none;
+        }
+        
+        .footer-widget li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-widget a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-widget a:hover {
+            color: #f9a825;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+        
+        /* Social icons */
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            color: white;
+            background-color: #444;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #f9a825;
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .article-content {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            .main-nav {
+                display: none;
+                flex-direction: column;
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 20px;
+            }
+            
+            .article-title {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .article-meta span {
+                margin-bottom: 5px;
+            }
+            
+            .slider-arrow {
+                padding: 10px 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo">দৈনিক <span>বাংলা</span></div>
+            <div class="date-time">
+                <i class="far fa-calendar-alt"></i> <span id="bangla-date">লোড হচ্ছে...</span>
+                <i class="far fa-clock" style="margin-left: 15px;"></i> <span id="bangla-time">লোড হচ্ছে...</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="main-nav">
+                <li><a href="#">প্রথম পাতা</a></li>
+                <li><a href="#">রাজনীতি</a></li>
+                <li><a href="#">বাংলাদেশ</a></li>
+                <li><a href="#">আন্তর্জাতিক</a></li>
+                <li><a href="#">খেলা</a></li>
+                <li><a href="#">বিনোদন</a></li>
+                <li><a href="#">অর্থনীতি</a></li>
+                <li><a href="#">প্রযুক্তি</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Article Section -->
+        <main class="article-container">
+            <div class="article-header">
+                <h1 class="article-title">ঢাকায় তিন দিনের বৃষ্টিপাতে জলাবদ্ধতা, যানজটে বিপর্যস্ত নগরীবাসী</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-user-edit"></i> রিপোর্ট: সাইফুল ইসলাম</span>
+                    <span><i class="far fa-eye"></i> ১২,৫৪৩ বার পঠিত</span>
+                    <span><i class="far fa-comments"></i> ২৩৪ টি মন্তব্য</span>
+                </div>
+            </div>
+            
+            <!-- Ad Banner -->
+            <div class="ad-container">
+                <p>Advertisement</p>
+            </div>
+            
+            <!-- Image Slider -->
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide">
+                        <img src="https://tfe-bd.sgp1.cdn.digitaloceanspaces.com/posts/13383/rain-dhaka-june-93pg.jpeg" alt="ঢাকার জলাবদ্ধতার ছবি">
+                        <div class="slide-caption">ঢাকার মোহাম্মদপুর এলাকায় জলাবদ্ধতার দৃশ্য</div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://tfe-bd.sgp1.cdn.digitaloceanspaces.com/posts/13383/rain-dhaka-june-93pg.jpeg" alt="ঢাকার জলাবদ্ধতার ছবি">
+                        <div class="slide-caption">ধানমন্ডি এলাকায় পানি জমে থাকায় পথচারীদের ভোগান্তি</div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://tfe-bd.sgp1.cdn.digitaloceanspaces.com/posts/13383/rain-dhaka-june-93pg.jpeg" alt="ঢাকার জলাবদ্ধতার ছবি">
+                        <div class="slide-caption">মিরপুরে যানজটের দৃশ্য</div>
+                    </div>
+                </div>
+                <button class="slider-arrow prev">&lt;</button>
+                <button class="slider-arrow next">&gt;</button>
+                <div class="slider-nav">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
+            </div>
+            
+            <div class="article-content">
+                <p>ঢাকা: টানা তিন দিনের বৃষ্টিপাতে রাজধানী ঢাকার বিভিন্ন স্থানে জলাবদ্ধতা দেখা দিয়েছে। এর ফলে সৃষ্টি হয়েছে তীব্র যানজট। নগরীবাসী আজ সোমবারও ভোগান্তির শিকার হচ্ছেন। বিশেষ করে মোহাম্মদপুর, ধানমন্ডি, মিরপুর ও পুরান ঢাকার বিভিন্ন এলাকায় পানি জমে থাকায় রাস্তায় চলাচল করতে হিমশিম খাচ্ছেন পথচারীরা।</p>
+                
+                <p>ঢাকা দক্ষিণ সিটি কর্পোরেশন সূত্রে জানা গেছে, গত শুক্রবার থেকে শুরু হওয়া বৃষ্টিপাতের কারণে শহরের নিচু এলাকাগুলোতে পানি জমেছে। ড্রেনেজ সিস্টেমের অপর্যাপ্ততা ও ময়লা-আবর্জনা জমে থাকায় পানি নিষ্কাশন ঠিকমতো হচ্ছে না।</p>
+                
+                <!-- YouTube Video Embed -->
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+                </div>
+                <p style="text-align: center; font-style: italic; color: #666;">ঢাকার জলাবদ্ধতা নিয়ে একটি প্রতিবেদন (ভিডিও: YouTube)</p>
+                
+                <h2>যানজটের চিত্র</h2>
+                
+                <p>রাজধানীর প্রধান প্রধান সড়কগুলোতে সৃষ্টি হয়েছে তীব্র যানজট। বিশেষ করে মোহাম্মদপুরের সাত মসজিদ রোড, ধানমন্ডির সাতমসজিদ রোড, মিরপুরের ১০ নম্বর সেক্টর ও গাবতলী এলাকায় যানজট ভয়াবহ রূপ নিয়েছে। অনেক স্থানে যানবাহন আধা ঘণ্টার বেশি সময় ধরে একই স্থানে আটকে আছে।</p>
+                
+                <p>একজন গণপরিবহন চালক জানান, "সাধারণত ২০ মিনিটের পথ আজ দুই ঘণ্টা ধরে চলছি। যাত্রীরা অসন্তুষ্ট, কিন্তু আমাদের কিছু করার নেই।"</p>
+                
+                <h2>নাগরিকদের প্রতিক্রিয়া</h2>
+                
+                <p>মোহাম্মদপুরের বাসিন্দা রহিমা বেগম বলেন, "প্রতি বর্ষায় আমাদের এলাকায় পানি জমে। এবার পরিস্থিতি আরও খারাপ। বাচ্চাদের স্কুলে নিয়ে যেতে পারছি না।"</p>
+                
+                <p>ধানমন্ডির অফিসযাত্রী তানভীর আহমেদ বলেন, "সকাল থেকে অফিসে পৌঁছাতে পারিনি। যানজটে আটকে আছি। শহরের ড্রেনেজ সিস্টেম উন্নয়ন জরুরি।"</p>
+                
+                <!-- Another YouTube Video Embed -->
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/ANOTHER_VIDEO_ID" allowfullscreen></iframe>
+                </div>
+                <p style="text-align: center; font-style: italic; color: #666;">ঢাকার ড্রেনেজ সমস্যা নিয়ে বিশেষজ্ঞের মতামত (ভিডিও: YouTube)</p>
+                
+                <h2>কর্তৃপক্ষের বক্তব্য</h2>
+                
+                <p>ঢাকা দক্ষিণ সিটি কর্পোরেশনের প্রধান কর্মকর্তা জানান, জলাবদ্ধতা দূর করতে তারা কাজ করছেন। তিনি বলেন, "আমাদের ড্রেনেজ সিস্টেমের সক্ষমতা বৃদ্ধির কাজ চলছে। তবে বৃষ্টির পানি সরাতে কিছুটা সময় লাগবে।"</p>
+                
+                <p>আবহাওয়া অধিদপ্তর সূত্রে জানা গেছে, আগামী ২৪ ঘণ্টায় আরও বৃষ্টিপাতের সম্ভাবনা রয়েছে। এ অবস্থায় নগরীবাসীর ভোগান্তি আরও বাড়তে পারে বলে আশঙ্কা করা হচ্ছে।</p>
+            </div>
+            
+            <!-- Ad Banner -->
+            <div class="ad-container">
+                <p>Advertisement</p>
+            </div>
+        </main>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="ad-sidebar">
+                <p>Side Advertisement 1</p>
+            </div>
+            <div class="ad-sidebar">
+                <p>Side Advertisement 2</p>
+            </div>
+            <div class="ad-sidebar">
+                <p>Side Advertisement 3</p>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-widget">
+                <h3>সম্পর্কিত</h3>
+                <ul>
+                    <li><a href="#">আমাদের সম্পর্কে</a></li>
+                    <li><a href="#">যোগাযোগ</a></li>
+                    <li><a href="#">প্রাইভেসি পলিসি</a></li>
+                    <li><a href="#">ক্যারিয়ার</a></li>
+                </ul>
+            </div>
+            <div class="footer-widget">
+                <h3>ক্যাটাগরি</h3>
+                <ul>
+                    <li><a href="#">রাজনীতি</a></li>
+                    <li><a href="#">বাংলাদেশ</a></li>
+                    <li><a href="#">আন্তর্জাতিক</a></li>
+                    <li><a href="#">খেলা</a></li>
+                </ul>
+            </div>
+            <div class="footer-widget">
+                <h3>আর্কাইভ</h3>
+                <ul>
+                    <li><a href="#">২০২৩</a></li>
+                    <li><a href="#">২০২২</a></li>
+                    <li><a href="#">২০২১</a></li>
+                    <li><a href="#">২০২০</a></li>
+                </ul>
+            </div>
+            <div class="footer-widget">
+                <h3>সামাজিক যোগাযোগ</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; <span id="current-year">২০২৩</span> দৈনিক বাংলা - সর্বস্বত্ব সংরক্ষিত
+        </div>
+    </footer>
+    
+    <script>
+        // Function to update Bengali date and time
+        function updateBanglaDateTime() {
+            const now = new Date();
+            
+            // Adjust for Bangladesh time (UTC+6)
+            const bangladeshOffset = 6 * 60 * 60 * 1000;
+            const bdTime = new Date(now.getTime() + bangladeshOffset);
+            
+            // Bengali month names
+            const banglaMonths = [
+                "জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন",
+                "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"
+            ];
+            
+            // Bengali day names
+            const banglaDays = [
+                "রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", 
+                "বৃহস্পতিবার", "শুক্রবার", "শনিবার"
+            ];
+            
+            // Format date
+            const day = bdTime.getDate();
+            const month = banglaMonths[bdTime.getMonth()];
+            const year = bdTime.getFullYear();
+            const dayName = banglaDays[bdTime.getDay()];
+            
+            // Format time
+            let hours = bdTime.getHours();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            const minutes = bdTime.getMinutes().toString().padStart(2, '0');
+            
+            // Update the date and time elements
+            document.getElementById('bangla-date').textContent = `${day} ${month} ${year}, ${dayName}`;
+            document.getElementById('bangla-time').textContent = `${hours}:${minutes} ${ampm}`;
+        }
+        
+        // Update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Initialize and update time every minute
+        updateBanglaDateTime();
+        setInterval(updateBanglaDateTime, 60000); // Update every minute
+        
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+        });
+        
+        // Image Slider Functionality
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function goToSlide(n) {
+            slider.style.transform = `translateX(-${n * 100}%)`;
+            currentSlide = n;
+            updateDots();
+        }
+        
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            goToSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            goToSlide(currentSlide);
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+        
+        // Auto slide change every 5 seconds
+        let slideInterval = setInterval(nextSlide, 5000);
+        
+        // Pause on hover
+        const sliderContainer = document.querySelector('.slider-container');
+        sliderContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        sliderContainer.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+        
+        // YouTube Video Embed Helper
+        function processYouTubeEmbeds() {
+            const embeds = document.querySelectorAll('.video-embed iframe');
+            embeds.forEach(embed => {
+                // Extract video ID from src and format properly
+                const src = embed.getAttribute('src');
+                if (src && src.includes('youtube.com/embed/')) {
+                    const videoId = src.split('youtube.com/embed/')[1].split('?')[0];
+                    embed.setAttribute('src', `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`);
+                }
+            });
+        }
+        
+        // Process YouTube embeds on page load
+        window.addEventListener('load', processYouTubeEmbeds);
+    </script>
+</body>
+</html>
