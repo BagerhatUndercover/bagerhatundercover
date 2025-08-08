@@ -271,6 +271,13 @@
             height: 250px;
             border: 1px dashed #ccc;
             margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .ad-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .ad-sidebar {
@@ -281,6 +288,23 @@
             height: 300px;
             border: 1px dashed #ccc;
             margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .ad-sidebar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .google-ad {
+            background-color: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         /* Footer styles */
@@ -469,8 +493,8 @@
             </div>
             
             <!-- Ad Banner -->
-            <div class="ad-container">
-                <p>Advertisement</p>
+            <div class="ad-container" id="main-ad">
+                <!-- Ad will be loaded by JavaScript -->
             </div>
             
             <!-- Image Slider -->
@@ -481,11 +505,11 @@
                         <div class="slide-caption">ঢাকার মোহাম্মদপুর এলাকায় জলাবদ্ধতার দৃশ্য</div>
                     </div>
                     <div class="slide">
-                        <img src="https://tfe-bd.sgp1.cdn.digitaloceanspaces.com/posts/13383/rain-dhaka-june-93pg.jpeg" alt="ঢাকার জলাবদ্ধতার ছবি">
+                        <img src="https://images.prothomalo.com/prothomalo-bangla%2F2023-06%2Fc8a5a9a5-8e0e-4c7d-9a0d-5e3d5b5b5b5b%2Frain_dhaka.jpg" alt="ঢাকার জলাবদ্ধতার ছবি">
                         <div class="slide-caption">ধানমন্ডি এলাকায় পানি জমে থাকায় পথচারীদের ভোগান্তি</div>
                     </div>
                     <div class="slide">
-                        <img src="https://tfe-bd.sgp1.cdn.digitaloceanspaces.com/posts/13383/rain-dhaka-june-93pg.jpeg" alt="ঢাকার জলাবদ্ধতার ছবি">
+                        <img src="https://images.thedailystar.net/sites/default/files/styles/big_202/public/images/2023/06/12/dhaka_traffic_jam.jpg" alt="ঢাকার জলাবদ্ধতার ছবি">
                         <div class="slide-caption">মিরপুরে যানজটের দৃশ্য</div>
                     </div>
                 </div>
@@ -505,7 +529,7 @@
                 
                 <!-- YouTube Video Embed -->
                 <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
                 <p style="text-align: center; font-style: italic; color: #666;">ঢাকার জলাবদ্ধতা নিয়ে একটি প্রতিবেদন (ভিডিও: YouTube)</p>
                 
@@ -523,7 +547,7 @@
                 
                 <!-- Another YouTube Video Embed -->
                 <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/ANOTHER_VIDEO_ID" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" allowfullscreen></iframe>
                 </div>
                 <p style="text-align: center; font-style: italic; color: #666;">ঢাকার ড্রেনেজ সমস্যা নিয়ে বিশেষজ্ঞের মতামত (ভিডিও: YouTube)</p>
                 
@@ -534,22 +558,27 @@
                 <p>আবহাওয়া অধিদপ্তর সূত্রে জানা গেছে, আগামী ২৪ ঘণ্টায় আরও বৃষ্টিপাতের সম্ভাবনা রয়েছে। এ অবস্থায় নগরীবাসীর ভোগান্তি আরও বাড়তে পারে বলে আশঙ্কা করা হচ্ছে।</p>
             </div>
             
-            <!-- Ad Banner -->
-            <div class="ad-container">
-                <p>Advertisement</p>
+            <!-- Bottom Ad Banner -->
+            <div class="ad-container" id="bottom-ad">
+                <!-- Ad will be loaded by JavaScript -->
             </div>
         </main>
         
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="ad-sidebar">
-                <p>Side Advertisement 1</p>
+            <!-- Sidebar Ad 1 -->
+            <div class="ad-sidebar" id="sidebar-ad1">
+                <!-- Ad will be loaded by JavaScript -->
             </div>
-            <div class="ad-sidebar">
-                <p>Side Advertisement 2</p>
+            
+            <!-- Sidebar Ad 2 -->
+            <div class="ad-sidebar" id="sidebar-ad2">
+                <!-- Ad will be loaded by JavaScript -->
             </div>
-            <div class="ad-sidebar">
-                <p>Side Advertisement 3</p>
+            
+            <!-- Sidebar Ad 3 -->
+            <div class="ad-sidebar" id="sidebar-ad3">
+                <!-- Ad will be loaded by JavaScript -->
             </div>
         </aside>
     </div>
@@ -600,42 +629,207 @@
     </footer>
     
     <script>
+        // =============================================
+        // AD CONFIGURATION
+        // =============================================
+        const publisherId = 'pub-8506372223420274';
+        const customerId = '6163339865';
+        
+        // Main Banner Ad (Top of article)
+        const mainAdType = 'google'; // 'google' or 'photo'
+        const mainAdPhoto = 'https://via.placeholder.com/728x250?text=Main+Advertisement';
+        const mainAdLink = 'https://example.com';
+        const mainAdSlot = 'main_banner_ad';
+        
+        // Bottom Banner Ad (Bottom of article)
+        const bottomAdType = 'google'; // 'google' or 'photo'
+        const bottomAdPhoto = 'https://via.placeholder.com/728x250?text=Bottom+Advertisement';
+        const bottomAdLink = 'https://example.com';
+        const bottomAdSlot = 'bottom_banner_ad';
+        
+        // Sidebar Ad 1
+        const sidebarAd1Type = 'google'; // 'google' or 'photo'
+        const sidebarAd1Photo = 'https://via.placeholder.com/300x250?text=Sidebar+Ad+1';
+        const sidebarAd1Link = 'https://example.com';
+        const sidebarAd1Slot = 'sidebar_ad_1';
+        
+        // Sidebar Ad 2
+        const sidebarAd2Type = 'google'; // 'google' or 'photo'
+        const sidebarAd2Photo = 'https://via.placeholder.com/300x250?text=Sidebar+Ad+2';
+        const sidebarAd2Link = 'https://example.com';
+        const sidebarAd2Slot = 'sidebar_ad_2';
+        
+        // Sidebar Ad 3
+        const sidebarAd3Type = 'google'; // 'google' or 'photo'
+        const sidebarAd3Photo = 'https://via.placeholder.com/300x250?text=Sidebar+Ad+3';
+        const sidebarAd3Link = 'https://example.com';
+        const sidebarAd3Slot = 'sidebar_ad_3';
+        
+        // =============================================
+        // AD IMPLEMENTATION
+        // =============================================
+        
+        // Function to load ads based on configuration
+        function loadAds() {
+            // Main Ad
+            const mainAd = document.getElementById('main-ad');
+            if (mainAdType === 'google') {
+                loadGoogleAd(mainAd, '728x250', mainAdSlot);
+            } else {
+                mainAd.innerHTML = `
+                    <a href="${mainAdLink}" target="_blank">
+                        <img src="${mainAdPhoto}" alt="Advertisement">
+                    </a>
+                `;
+            }
+            
+            // Bottom Ad
+            const bottomAd = document.getElementById('bottom-ad');
+            if (bottomAdType === 'google') {
+                loadGoogleAd(bottomAd, '728x250', bottomAdSlot);
+            } else {
+                bottomAd.innerHTML = `
+                    <a href="${bottomAdLink}" target="_blank">
+                        <img src="${bottomAdPhoto}" alt="Advertisement">
+                    </a>
+                `;
+            }
+            
+            // Sidebar Ad 1
+            const sidebarAd1 = document.getElementById('sidebar-ad1');
+            if (sidebarAd1Type === 'google') {
+                loadGoogleAd(sidebarAd1, '300x250', sidebarAd1Slot);
+            } else {
+                sidebarAd1.innerHTML = `
+                    <a href="${sidebarAd1Link}" target="_blank">
+                        <img src="${sidebarAd1Photo}" alt="Advertisement">
+                    </a>
+                `;
+            }
+            
+            // Sidebar Ad 2
+            const sidebarAd2 = document.getElementById('sidebar-ad2');
+            if (sidebarAd2Type === 'google') {
+                loadGoogleAd(sidebarAd2, '300x250', sidebarAd2Slot);
+            } else {
+                sidebarAd2.innerHTML = `
+                    <a href="${sidebarAd2Link}" target="_blank">
+                        <img src="${sidebarAd2Photo}" alt="Advertisement">
+                    </a>
+                `;
+            }
+            
+            // Sidebar Ad 3
+            const sidebarAd3 = document.getElementById('sidebar-ad3');
+            if (sidebarAd3Type === 'google') {
+                loadGoogleAd(sidebarAd3, '300x250', sidebarAd3Slot);
+            } else {
+                sidebarAd3.innerHTML = `
+                    <a href="${sidebarAd3Link}" target="_blank">
+                        <img src="${sidebarAd3Photo}" alt="Advertisement">
+                    </a>
+                `;
+            }
+        }
+        
+        // Function to properly load Google AdSense
+        function loadGoogleAd(container, adSize, adSlot) {
+            // Create the ad container
+            const adDiv = document.createElement('div');
+            adDiv.className = 'google-ad';
+            container.innerHTML = '';
+            container.appendChild(adDiv);
+            
+            // Create the ins element
+            const ins = document.createElement('ins');
+            ins.className = 'adsbygoogle';
+            ins.style.display = 'block';
+            ins.setAttribute('data-ad-client', publisherId);
+            ins.setAttribute('data-ad-slot', adSlot);
+            ins.setAttribute('data-ad-format', 'auto');
+            ins.setAttribute('data-full-width-responsive', 'true');
+            
+            adDiv.appendChild(ins);
+            
+            // Load AdSense script if not already loaded
+            if (!window.adsbygoogle) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`;
+                script.crossOrigin = 'anonymous';
+                document.body.appendChild(script);
+            }
+            
+            // Push the ad request
+            if (window.adsbygoogle) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } else {
+                // If AdSense script isn't loaded yet, try again in 1 second
+                setTimeout(() => {
+                    if (window.adsbygoogle) {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                }, 1000);
+            }
+        }
+        
         // Function to update Bengali date and time
         function updateBanglaDateTime() {
-            const now = new Date();
+            const options = {
+                timeZone: 'Asia/Dhaka',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            };
             
-            // Adjust for Bangladesh time (UTC+6)
-            const bangladeshOffset = 6 * 60 * 60 * 1000;
-            const bdTime = new Date(now.getTime() + bangladeshOffset);
+            // Bengali locale (may not work in all browsers)
+            const banglaDate = new Date().toLocaleDateString('bn-BD', options);
+            const banglaTime = new Date().toLocaleTimeString('bn-BD', {
+                timeZone: 'Asia/Dhaka',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            });
             
-            // Bengali month names
-            const banglaMonths = [
-                "জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন",
-                "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"
-            ];
-            
-            // Bengali day names
-            const banglaDays = [
-                "রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", 
-                "বৃহস্পতিবার", "শুক্রবার", "শনিবার"
-            ];
-            
-            // Format date
-            const day = bdTime.getDate();
-            const month = banglaMonths[bdTime.getMonth()];
-            const year = bdTime.getFullYear();
-            const dayName = banglaDays[bdTime.getDay()];
-            
-            // Format time
-            let hours = bdTime.getHours();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-            const minutes = bdTime.getMinutes().toString().padStart(2, '0');
-            
-            // Update the date and time elements
-            document.getElementById('bangla-date').textContent = `${day} ${month} ${year}, ${dayName}`;
-            document.getElementById('bangla-time').textContent = `${hours}:${minutes} ${ampm}`;
+            // Fallback for browsers that don't support Bengali locale
+            if (banglaDate.includes('GMT') || banglaTime.includes('GMT')) {
+                // Use our own formatting as fallback
+                const now = new Date();
+                const banglaMonths = [
+                    "জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন",
+                    "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"
+                ];
+                
+                const banglaDays = [
+                    "রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", 
+                    "বৃহস্পতিবার", "শুক্রবার", "শনিবার"
+                ];
+                
+                // Adjust for Bangladesh time (UTC+6)
+                const bangladeshOffset = 6 * 60 * 60 * 1000;
+                const bdTime = new Date(now.getTime() + bangladeshOffset);
+                
+                const day = bdTime.getDate();
+                const month = banglaMonths[bdTime.getMonth()];
+                const year = bdTime.getFullYear();
+                const dayName = banglaDays[bdTime.getDay()];
+                
+                let hours = bdTime.getHours();
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                const minutes = bdTime.getMinutes().toString().padStart(2, '0');
+                
+                document.getElementById('bangla-date').textContent = `${day} ${month} ${year}, ${dayName}`;
+                document.getElementById('bangla-time').textContent = `${hours}:${minutes} ${ampm}`;
+            } else {
+                document.getElementById('bangla-date').textContent = banglaDate;
+                document.getElementById('bangla-time').textContent = banglaTime;
+            }
         }
         
         // Update copyright year
@@ -717,8 +911,13 @@
             });
         }
         
-        // Process YouTube embeds on page load
-        window.addEventListener('load', processYouTubeEmbeds);
+        // Load ads and process YouTube embeds on page load
+        window.addEventListener('load', function() {
+            loadAds();
+            processYouTubeEmbeds();
+        });
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8506372223420274"
+     crossorigin="anonymous"></script>
 </body>
 </html>
